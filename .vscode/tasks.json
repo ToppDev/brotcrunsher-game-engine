@@ -1,0 +1,57 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build C++ project",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "command": "make",
+            "presentation": {
+                "clear": true
+            }
+        },
+        {
+            "label": "Build & run C++ project",
+            "type": "shell",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "command": "make",
+            "args": [
+                "run"
+            ],
+            "presentation": {
+                "clear": true
+            }
+        },
+        {
+            "label": "Valgrind Profiler",
+            "type": "shell",
+            "command": "valgrind",
+            "args": [
+                "--callgrind-out-file=profiler/callgrind.out",
+                "--tool=callgrind",
+                "out/main"
+            ],
+            "presentation": {
+                "clear": true
+            }
+        },
+        {
+            "label": "Run & show CPU Profiler",
+            "type": "shell",
+            "command": "kcachegrind",
+            "args": [
+                "profiler/callgrind.out"
+            ],
+            "dependsOn": [
+                "Valgrind Profiler"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}
